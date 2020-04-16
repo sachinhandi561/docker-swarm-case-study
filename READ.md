@@ -15,7 +15,7 @@
    ```terraform apply```
 5. Once everything is done it will show the output.like below
 
-# NOTE:
+### Terraform:
  - Terraform will create below resources.
    1. 1 Master
    2. 4 Workers
@@ -26,7 +26,7 @@
 6. Update the hosts file accordingly.
 9. Run ansible-playbook
    ``` ansible-playbook playbook.yml ```
-# NOTE:
+### Ansible:
  - Ansible will provision below resources.
    1. Configure Docker Swarm Master if Master is already not configured.
    2. Create tokens for worker.
