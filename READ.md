@@ -1,5 +1,5 @@
-Steps:
-Assumptions:
+# Steps:
+## Assumptions:
  - terraform version 0.11.14
  - Ansible version: 2.9.1
 
@@ -10,12 +10,12 @@ Assumptions:
    - subnet --> Change as per your VPC.
    - public key path ---> By default it will check the public key in the /home/user/.ssh/ folder.
 3. Initialize terraform
-   # terraform init
+   ```terraform init```
 4. Apply Terraform 
-   # terraform apply
+   ```terraform apply```
 5. Once everything is done it will show the output.like below
 
-NOTE:
+# NOTE:
  - Terraform will create below resources.
    1. 1 Master
    2. 4 Workers
@@ -25,8 +25,8 @@ NOTE:
    4. Security Group
 6. Update the hosts file accordingly.
 9. Run ansible-playbook
-   # ansible-playbook playbook.yml
-NOTE:
+   ``` ansible-playbook playbook.yml ```
+# NOTE:
  - Ansible will provision below resources.
    1. Configure Docker Swarm Master if Master is already not configured.
    2. Create tokens for worker.
