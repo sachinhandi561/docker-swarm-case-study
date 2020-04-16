@@ -1,0 +1,76 @@
+---
+  - name: Init Swarm Master
+    hosts: masters
+    gather_facts: False
+    remote_user: ubuntu
+    tasks:
+      - name: Check if Docker Swarm is already enabled.
+        shell: netstat -tunlp | grep 2377
+        register: command_res
+        ignore_errors: yes
+
+      - debug: var=command_res
+      - name: Swarm Init
+        command: docker swarm init --advertise-addr {{ inventory_hostname }}
+        when: command_res.rc != 0
+
+      - name: Get Worker Token
+        command: docker swarm join-token worker -q
+        register: worker_token
+
+      - name: Show Worker Token
+        debug: var=worker_token.stdout
+
+      - name: Master Token
+        command: docker swarm join-token manager -q
+        register: master_token
+
+      - name: Show Master Token
+        debug: var=master_token.stdout
+
+  - name: Join Swarm Cluster
+    hosts: workers
+    remote_user: ubuntu
+    gather_facts: False
+    vars:
+      token: "{{ hostvars[groups['masters'][0]]['worker_token']['stdout'] }}"
+      master: "{{ hostvars[groups['masters'][0]]['inventory_hostname'] }}"
+    tasks:
+      - name: Join Swarm Cluster as a Worker
+        command: docker swarm join --token {{ token }} {{ master }}:2377
+        register: worker
+        ignore_errors: yes
+
+      - name: Show Results
+        debug: var=worker.stdout
+
+      - name: Show Errors
+        debug: var=worker.stderr
+
+  - name: Deploy stack with docker-compose
+    hosts: masters
+    gather_facts: False
+    remote_user: ubuntu
+    become: true
+    tasks:
+      - name: Install Python pip
+        apt: name={{ item }} state=present update_cache=yes
+        with_items:
+           - python-pip
+      - name: Installing required packages for docker stack
+        pip:
+          name:
+            - jsondiff
+            - pyyaml
+      - name: Copying docker-compose file from ansible box to master
+        copy:
+          src: ./docker-compose.yml
+          dest: /opt/docker-compose.yml
+         
+      - name: Deploy Docker stack on swarm
+        docker_stack:
+          state: present
+          name: mywebstack
+          compose:
+             - /opt/docker-compose.yml
+
