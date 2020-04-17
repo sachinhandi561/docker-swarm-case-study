@@ -13,5 +13,5 @@ output "WORKER3" {
   value = "${aws_instance.worker3.public_ip}"
 }
 output "WORKER4" {
-  value = "${aws_instance.worker3.public_ip}"
+  value = "${aws_instance.worker4.public_ip}"
 }
