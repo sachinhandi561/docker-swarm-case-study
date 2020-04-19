@@ -37,7 +37,16 @@ WORKER4 = 13.233.6.29
     3.1 Healthcheck on tcp 22
     3.2 Listener on 22/22377/80 port
    4. Security Group
-6. Update the hosts file accordingly from above output.
+6. Update the hosts file accordingly from above output, so file should look like below.
+```
+[masters]
+13.126.119.190
+[workers]
+13.233.119.232
+15.206.147.247
+13.232.3.74
+13.233.6.29
+```
 9. Run ansible-playbook
    ``` 
    ansible-playbook playbook.yml 
