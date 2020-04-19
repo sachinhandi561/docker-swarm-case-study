@@ -10,9 +10,13 @@
    - subnet --> Change as per your VPC.
    - public key path ---> By default it will check the public key in the /home/user/.ssh/ folder.
 3. Initialize terraform
-   ```terraform init```
+   ```
+   terraform init
+   ```
 4. Apply Terraform 
-   ```terraform apply```
+   ```
+   terraform apply
+   ```
 5. Once everything is done it will show the output.like below
 
 ```
@@ -33,9 +37,11 @@ WORKER4 = 13.233.6.29
     3.1 Healthcheck on tcp 22
     3.2 Listener on 22/22377/80 port
    4. Security Group
-6. Update the hosts file accordingly.
+6. Update the hosts file accordingly from above output.
 9. Run ansible-playbook
-   ``` ansible-playbook playbook.yml ```
+   ``` 
+   ansible-playbook playbook.yml 
+   ```
 ### Ansible:
  - Ansible will provision below resources.
    1. Configure Docker Swarm Master if Master is already not configured.
