@@ -15,7 +15,7 @@
    ```terraform apply```
 5. Once everything is done it will show the output.like below
 
-
+```
 Outputs:
 
 MASTER = 13.126.119.190
@@ -23,6 +23,7 @@ WORKER1 = 13.233.119.232
 WORKER2 = 15.206.147.247
 WORKER3 = 13.232.3.74
 WORKER4 = 13.233.6.29
+````
 
 ### Terraform:
  - Terraform will create below resources.
