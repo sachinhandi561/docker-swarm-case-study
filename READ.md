@@ -58,3 +58,11 @@ WORKER4 = 13.233.6.29
    3. Add all 4 workers in Docker Swarm cluster.
    4. Copy docker-compose file from localhost to master server
    5. Create Docker stack based on ansible-module docker_stack with above compose file.
+   6. Take the load balancer and browse it on the browser on 80 port, we should see the webapge.
+   
+### Manual Deployment stack:
+   1. Login to Master.
+   ```
+   ssh ubuntu@13.126.119.190
+   docker stack deploy -c /opt/docker-compose.yml webstack
+   ```
