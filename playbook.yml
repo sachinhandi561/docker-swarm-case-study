@@ -62,6 +62,7 @@
           name:
             - jsondiff
             - pyyaml
+        ignore_errors: yes
       - name: Copying docker-compose file from ansible box to master
         copy:
           src: ./docker-compose.yml
